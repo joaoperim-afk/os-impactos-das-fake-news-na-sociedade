@@ -6,6 +6,7 @@
     --primary-color: #2563eb;
     --primary-hover: #1d4ed8;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --modal-overlay: rgba(0, 0, 0, 0.6);
 }
 
 [data-theme="dark"] {
@@ -16,6 +17,7 @@
     --primary-color: #3b82f6;
     --primary-hover: #60a5fa;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --modal-overlay: rgba(0, 0, 0, 0.8);
 }
 
 * {
@@ -110,12 +112,9 @@ h2 {
     box-shadow: var(--shadow);
 }
 
-/* Estilo para cards clicáveis que abrem em nova aba */
 .card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .card-link:hover {
@@ -133,6 +132,65 @@ h2 {
     height: 1px;
     background: var(--border-color);
     margin: 4rem 0;
+}
+
+/* Modal / Popup */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--modal-overlay);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 2.5rem;
+    border-radius: 16px;
+    max-width: 650px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-color);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-body h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.modal-body p {
+    margin-bottom: 1rem;
+}
+
+.modal-quote {
+    background-color: var(--bg-color);
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    border-radius: 4px;
 }
 
 /* Jogos */
@@ -225,7 +283,7 @@ h2 {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .score-board {
