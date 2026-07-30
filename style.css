@@ -1,4 +1,3 @@
-/* Varíaveis de Cores para Modo Claro e Escuro */
 :root {
     --bg-color: #f8f9fa;
     --text-color: #212529;
@@ -85,9 +84,15 @@ header {
     padding: 0 1rem;
 }
 
+.subtitle {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
 h2 {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     font-size: 1.8rem;
 }
 
@@ -105,12 +110,32 @@ h2 {
     box-shadow: var(--shadow);
 }
 
+/* Estilo para cards clicáveis que abrem em nova aba */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-link:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary-color);
+}
+
 .card h3 {
     margin-bottom: 0.8rem;
     color: var(--primary-color);
 }
 
-/* Joguinho */
+.divider {
+    border: 0;
+    height: 1px;
+    background: var(--border-color);
+    margin: 4rem 0;
+}
+
+/* Jogos */
 .game-section {
     text-align: center;
 }
@@ -125,7 +150,7 @@ h2 {
     margin: 1.5rem auto;
 }
 
-#headline {
+#headline, #trigger-headline {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
@@ -137,17 +162,39 @@ h2 {
     gap: 1rem;
 }
 
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
 .btn {
     padding: 0.8rem 1.5rem;
     border: none;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.1s ease;
+    transition: transform 0.1s ease, opacity 0.2s ease;
 }
 
-.btn:active {
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn:active:not(:disabled) {
     transform: scale(0.95);
+}
+
+.btn-option {
+    background-color: var(--card-bg);
+    border: 2px solid var(--primary-color);
+    color: var(--text-color);
+}
+
+.btn-option:hover:not(:disabled) {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 .btn-fake {
