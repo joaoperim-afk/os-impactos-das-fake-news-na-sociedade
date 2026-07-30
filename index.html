@@ -22,19 +22,20 @@
 
     <section class="container">
         <h2>Como as Fake News Afetam o Mundo?</h2>
+        <p class="subtitle">Clique nos cards para ler relatórios completos sobre cada tema em uma nova aba.</p>
         <div class="cards-grid">
-            <div class="card">
-                <h3>🩺 Saúde Pública</h3>
+            <a href="https://www.who.int/news-room/spotlight/let-s-flatten-the-infodemic-curve" target="_blank" rel="noopener noreferrer" class="card card-link">
+                <h3>🩺 Saúde Pública ↗</h3>
                 <p>Boatos sobre vacinas e tratamentos milagrosos colocam vidas em risco e ressuscitam doenças erradicadas.</p>
-            </div>
-            <div class="card">
-                <h3>🏛️ Democracia</h3>
+            </a>
+            <a href="https://www.unesco.org/en/countering-disinformation" target="_blank" rel="noopener noreferrer" class="card card-link">
+                <h3>🏛️ Democracia ↗</h3>
                 <p>Manipulação de debates eleitorais e polarização extrema enfraquecem a confiança nas instituições.</p>
-            </div>
-            <div class="card">
-                <h3>💸 Economia & Golpes</h3>
+            </a>
+            <a href="https://www.ftc.gov" target="_blank" rel="noopener noreferrer" class="card card-link">
+                <h3>💸 Economia & Golpes ↗</h3>
                 <p>Fraudes financeiras, falsas promoções e pânico no mercado geram prejuízos bilionários.</p>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -57,8 +58,8 @@
     </section>
 
     <section class="container game-section">
-        <h2>🎮 Mini-Game: Detetive da Verdade</h2>
-        <p>Analise a notícia abaixo e decida: <strong>VERDADE</strong> ou <strong>FAKE NEWS</strong>?</p>
+        <h2>🎮 Jogo 1: Detetive da Verdade</h2>
+        <p>Analise a notícia e decida se ela é <strong>VERDADE</strong> ou <strong>FAKE NEWS</strong>.</p>
         
         <div id="game-card" class="game-card">
             <p id="headline">Carregando notícia...</p>
@@ -70,7 +71,25 @@
         </div>
         
         <div class="score-board">
-            Pontuação: <span id="score">0</span>
+            Pontuação Jogo 1: <span id="score">0</span>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <section class="container game-section">
+        <h2>⚡ Jogo 2: Caça-Gatilhos Emocionais</h2>
+        <p>Fake news geralmente usam emoções fortes para nos fazer compartilhar sem pensar. Qual é o gatilho emocional usado nesta manchete?</p>
+        
+        <div id="trigger-card" class="game-card">
+            <p id="trigger-headline">Carregando frase...</p>
+            <div id="trigger-options" class="options-grid">
+                </div>
+            <div id="trigger-feedback" class="feedback hidden"></div>
+        </div>
+
+        <div class="score-board">
+            Pontuação Jogo 2: <span id="trigger-score">0</span>
         </div>
     </section>
 
