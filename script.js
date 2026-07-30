@@ -17,6 +17,73 @@ function setTheme(theme) {
     themeToggleBtn.innerHTML = theme === 'dark' ? '☀️ Modo Claro' : '🌙 Modo Escuro';
 }
 
+// --- CONTEÚDO DOS MODAIS E PESQUISADORES ---
+const modalData = {
+    saude: {
+        title: "🩺 O Impacto na Saúde Pública e Infodemia",
+        body: `
+            <p>A Organização Mundial da Saúde (OMS) criou o termo <strong>Infodemia</strong> para descrever o excesso de informações — algumas precisas e outras não — que tornam difícil para as pessoas encontrarem fontes idôneas quando precisam.</p>
+            <p>Na saúde, rumores e receitas milagrosas não apenas desinformam, mas causam mortes evitáveis e o abandono de tratamentos comprovados cientificamente.</p>
+            <div class="modal-quote">
+                "A desinformação em saúde mata tanto quanto vírus e bactérias. Quando uma pessoa deixa de se vacinar ou toma remédios sem eficácia por causa de uma notícia falsa, o impacto é coletivo." 
+                <br><br><strong>— Dra. Margareth Dalcolmo</strong>, Pesquisadora da Fundação Oswaldo Cruz (Fiocruz).
+            </div>
+            <p><strong>Como prevenir:</strong> Sempre consulte os canais oficiais do Ministério da Saúde ou a orientação do seu médico antes de compartilhar dicas de remédios caseiros ou alertas de pânico.</p>
+        `
+    },
+    democracia: {
+        title: "🏛️ Desinformação e o Desafio Democrático",
+        body: `
+            <p>Em sistemas democráticos, o voto consciente depende do acesso a fatos reais. As Fake News alteram essa dinâmica ao criarem realidades paralelas onde opiniões e teorias da conspiração substituem dados estatísticos e fatos históricos.</p>
+            <p>Pesquisadores alertam que o objetivo principal da desinformação em massa não é apenas fazer a pessoa acreditar em uma mentira, mas sim fazer com que ela <strong>deixe de acreditar em qualquer verdade</strong>.</p>
+            <div class="modal-quote">
+                "O ecossistema de desinformação não busca apenas vencer um debate, mas destruir a confiança pública no jornalismo profissional, na ciência e no Judiciário."
+                <br><br><strong>— Prof. Manuel Castells</strong>, Sociólogo e especialista em comunicação e redes digitais.
+            </div>
+            <p><strong>Como prevenir:</strong> Busque informações em veículos com jornalismo profissional e checadores de fatos independentes.</p>
+        `
+    },
+    economia: {
+        title: "💸 Golpes Financeiros e Engenharia Social",
+        body: `
+            <p>As Fake News também movem uma indústria milionária de fraudes digitais. Através da <em>engenharia social</em>, criminosos criam boatos alarmantes ou ofertas imperdíveis para manipular o comportamento do usuário.</p>
+            <p>Notícias falsas como "Governo libera saque surpresa de R$ 3.000" servem de isca para roubar senhas, dados de cartão de crédito e instalar vírus em celulares.</p>
+            <div class="modal-quote">
+                "O elo mais vulnerável da segurança digital é o fator humano. O golpista usa a urgência ou a ganância na notícia falsa para fazer a vítima agir por impulso."
+                <br><br><strong>— Bruce Schneier</strong>, Especialista internacional em segurança da informação e criptografia.
+            </div>
+            <p><strong>Como prevenir:</strong> Desconfie de vantagens exageradas, dinheiro fácil ou mensagens pedindo dados pessoais urgentemente.</p>
+        `
+    }
+};
+
+const modal = document.getElementById('info-modal');
+const modalBody = document.getElementById('modal-body');
+
+function openModal(topic) {
+    const data = modalData[topic];
+    if (data) {
+        modalBody.innerHTML = `
+            <div class="modal-body">
+                <h3>${data.title}</h3>
+                ${data.body}
+            </div>
+        `;
+        modal.classList.remove('hidden');
+    }
+}
+
+function closeModal() {
+    modal.classList.add('hidden');
+}
+
+function closeModalOnOverlay(event) {
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
+
 // --- JOGO 1: DETETIVE DA VERDADE ---
 const newsList = [
     {
@@ -151,7 +218,6 @@ function checkTriggerAnswer(selectedOption) {
     const q = triggerQuestions[triggerIndex];
     const isCorrect = selectedOption === q.correct;
 
-    // Desabilita todos os botões de opção após o clique
     const buttons = triggerOptionsEl.querySelectorAll('button');
     buttons.forEach(btn => btn.disabled = true);
 
