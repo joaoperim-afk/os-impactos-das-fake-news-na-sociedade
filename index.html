@@ -22,23 +22,23 @@
 
     <section class="container">
         <h2>Como as Fake News Afetam o Mundo?</h2>
-        <p class="subtitle">Clique nos cards abaixo para abrir os portais oficiais em português numa nova aba.</p>
+        <p class="subtitle">Clique em qualquer card para abrir o artigo explicativo com visões de pesquisadores.</p>
         
         <div class="cards-grid">
-            <a href="https://www.gov.br/saude/pt-br/assuntos/saude-com-ciencia" target="_blank" rel="noopener noreferrer" class="card card-link">
+            <div class="card card-link" onclick="openModal('saude')">
                 <h3>🩺 Saúde Pública ↗</h3>
                 <p>Boatos sobre vacinas e tratamentos milagrosos colocam vidas em risco e ressuscitam doenças erradicadas.</p>
-            </a>
+            </div>
 
-            <a href="https://www.justicaeleitoral.jus.br/fato-ou-boato/" target="_blank" rel="noopener noreferrer" class="card card-link">
+            <div class="card card-link" onclick="openModal('democracia')">
                 <h3>🏛️ Democracia ↗</h3>
                 <p>Manipulação de debates eleitorais e polarização extrema enfraquecem a confiança nas instituições.</p>
-            </a>
+            </div>
 
-            <a href="https://cartilha.cert.br/" target="_blank" rel="noopener noreferrer" class="card card-link">
+            <div class="card card-link" onclick="openModal('economia')">
                 <h3>💸 Economia & Golpes ↗</h3>
                 <p>Fraudes financeiras, falsas promoções e pânico no mercado geram prejuízos bilionários.</p>
-            </a>
+            </div>
         </div>
     </section>
 
@@ -94,6 +94,14 @@
             Pontuação Jogo 2: <span id="trigger-score">0</span>
         </div>
     </section>
+
+    <div id="info-modal" class="modal-overlay hidden" onclick="closeModalOnOverlay(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modal-body">
+                </div>
+        </div>
+    </div>
 
     <footer>
         <p>© 2026 Verdade em Foco - Projeto de Conscientização Digital</p>
