@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verdade em Foco - O Impacto das Fake News</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Verdade<span>EmFoco</span></div>
+        <button id="theme-toggle" aria-label="Alternar tema">
+            <span id="theme-icon">🌙</span> Modo Escuro
+        </button>
+    </header>
+
+    <section class="hero">
+        <h1>O Impacto Invisível das Fake News</h1>
+        <p>A desinformação espalha-se 6 vezes mais rápido que a verdade. Entenda como ela afeta a sociedade e descubra como fazer parte da solução.</p>
+    </section>
+
+    <section class="container">
+        <h2>Como as Fake News Afetam o Mundo?</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>🩺 Saúde Pública</h3>
+                <p>Boatos sobre vacinas e tratamentos milagrosos colocam vidas em risco e ressuscitam doenças erradicadas.</p>
+            </div>
+            <div class="card">
+                <h3>🏛️ Democracia</h3>
+                <p>Manipulação de debates eleitorais e polarização extrema enfraquecem a confiança nas instituições.</p>
+            </div>
+            <div class="card">
+                <h3>💸 Economia & Golpes</h3>
+                <p>Fraudes financeiras, falsas promoções e pânico no mercado geram prejuízos bilionários.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container highlight-section">
+        <h2>💡 Ideias Inovadoras para Combater a Desinformação</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>1. Selo Nutricional de Informação</h3>
+                <p>Plataformas exibirem um "rótulo" nos links indicando a taxa de rastreabilidade das fontes e histórico de checagens do autor.</p>
+            </div>
+            <div class="card">
+                <h3>2. Pedágio de Micro-Reflexão</h3>
+                <p>Um timer de 5 segundos obriga o usuário a responder uma pergunta rápida ("Você leu além da manchete?") antes de permitir o compartilhamento público.</p>
+            </div>
+            <div class="card">
+                <h3>3. Algoritmo de "Bolhas Cruzadas"</h3>
+                <p>Redes sociais recomendarem proativamente visões opostas checadas por fatos para quebrar câmaras de eco informacionais.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container game-section">
+        <h2>🎮 Mini-Game: Detetive da Verdade</h2>
+        <p>Analise a notícia abaixo e decida: <strong>VERDADE</strong> ou <strong>FAKE NEWS</strong>?</p>
+        
+        <div id="game-card" class="game-card">
+            <p id="headline">Carregando notícia...</p>
+            <div class="game-buttons">
+                <button id="btn-fake" class="btn btn-fake">🚨 Fake News</button>
+                <button id="btn-real" class="btn btn-real">✅ Fato Verdadeiro</button>
+            </div>
+            <div id="game-feedback" class="feedback hidden"></div>
+        </div>
+        
+        <div class="score-board">
+            Pontuação: <span id="score">0</span>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Verdade em Foco - Projeto de Conscientização Digital</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
