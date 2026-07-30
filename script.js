@@ -1,9 +1,7 @@
 // --- MODO CLARO / ESCURO ---
 const themeToggleBtn = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
 const htmlTag = document.documentElement;
 
-// Verifica tema salvo ou padrão
 const savedTheme = localStorage.getItem('theme') || 'light';
 setTheme(savedTheme);
 
@@ -16,34 +14,25 @@ themeToggleBtn.addEventListener('click', () => {
 function setTheme(theme) {
     htmlTag.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-    if (theme === 'dark') {
-        themeToggleBtn.innerHTML = '☀️ Modo Claro';
-    } else {
-        themeToggleBtn.innerHTML = '🌙 Modo Escuro';
-    }
+    themeToggleBtn.innerHTML = theme === 'dark' ? '☀️ Modo Claro' : '🌙 Modo Escuro';
 }
 
-// --- MINI-GAME: DETETIVE DA VERDADE ---
+// --- JOGO 1: DETETIVE DA VERDADE ---
 const newsList = [
     {
         headline: "Cientistas criam chá que cura o diabetes em apenas 3 dias.",
         isFake: true,
-        explanation: "FALSO: Não existe cura milagrosa rápida para o diabetes. Trata-se de desinformação perigosa para a saúde."
+        explanation: "FALSO: Não existe cura milagrosa rápida para o diabetes. É uma desinformação de saúde."
     },
     {
         headline: "Telescópio James Webb descobre novos detalhes de galáxias distantes.",
         isFake: false,
-        explanation: "VERDADEIRO: O James Webb é um telescópio real que envia imagens e dados valiosos frequentemente."
+        explanation: "VERDADEIRO: O James Webb envia dados reais e valiosos frequentemente."
     },
     {
         headline: "Usar o celular carregando atrai raios em dias de chuva dentro de casa.",
         isFake: true,
-        explanation: "FALSO: Raios são atraídos por pontos altos externos, não pela bateria do celular na tomada."
-    },
-    {
-        headline: "A Floresta Amazônica abriga mais de 10% de toda a biodiversidade conhecida na Terra.",
-        isFake: false,
-        explanation: "VERDADEIRO: A Amazônia possui uma das maiores biodiversidades do planeta confirmada por cientistas."
+        explanation: "FALSO: Raios são atraídos por pontos altos externos, não pela bateria na tomada."
     }
 ];
 
@@ -64,11 +53,11 @@ function loadNews() {
     if (currentIndex < newsList.length) {
         headlineEl.textContent = `"${newsList[currentIndex].headline}"`;
     } else {
-        headlineEl.textContent = "🎉 Você completou o desafio do Detetive!";
+        headlineEl.textContent = "🎉 Você completou o Jogo 1!";
         btnFake.style.display = 'none';
         btnReal.style.display = 'none';
         feedbackEl.className = "feedback correct";
-        feedbackEl.textContent = `Jogo Finalizado! Sua pontuação final foi: ${score}/${newsList.length}`;
+        feedbackEl.textContent = `Pontuação final: ${score}/${newsList.length}`;
         feedbackEl.classList.remove('hidden');
     }
 }
@@ -92,15 +81,96 @@ function checkAnswer(userSaidFake) {
 
     feedbackEl.classList.remove('hidden');
 
-    // Avança para a próxima notícia após 3.5 segundos
     setTimeout(() => {
         currentIndex++;
         loadNews();
-    }, 3500);
+    }, 3000);
 }
 
 btnFake.addEventListener('click', () => checkAnswer(true));
 btnReal.addEventListener('click', () => checkAnswer(false));
 
-// Inicializa o jogo
 loadNews();
+
+
+// --- JOGO 2: CAÇA-GATILHOS EMOCIONAIS ---
+const triggerQuestions = [
+    {
+        headline: "URGENTE! Compartilhe antes que o governo apague este vídeo!!!",
+        correct: "Urgência & Pânico",
+        options: ["Urgência & Pânico", "Curiosidade Científica", "Empatia"],
+        explanation: "Fake news usam urgência para impedir que você pense criticamente antes de compartilhar."
+    },
+    {
+        headline: "Você não vai acreditar no segredo chocante que este famoso descobriu!",
+        correct: "Curiosidade Extrema",
+        options: ["Medo", "Curiosidade Extrema", "Tristeza"],
+        explanation: "O 'clickbait' explora a curiosidade para gerar cliques fáceis sem entregar conteúdo real."
+    },
+    {
+        headline: "Aviso assustador: Esse alimento comum na sua casa está te envenenando lentamente!",
+        correct: "Medo & Insegurança",
+        options: ["Raiva", "Alegria", "Medo & Insegurança"],
+        explanation: "Gatilhos de medo geram alertas imediatos na nossa mente, facilitando a proliferação do boato."
+    }
+];
+
+let triggerIndex = 0;
+let triggerScore = 0;
+
+const triggerHeadlineEl = document.getElementById('trigger-headline');
+const triggerOptionsEl = document.getElementById('trigger-options');
+const triggerFeedbackEl = document.getElementById('trigger-feedback');
+const triggerScoreEl = document.getElementById('trigger-score');
+
+function loadTriggerQuestion() {
+    triggerFeedbackEl.classList.add('hidden');
+    triggerOptionsEl.innerHTML = '';
+
+    if (triggerIndex < triggerQuestions.length) {
+        const q = triggerQuestions[triggerIndex];
+        triggerHeadlineEl.textContent = `"${q.headline}"`;
+
+        q.options.forEach(option => {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-option';
+            btn.textContent = option;
+            btn.onclick = () => checkTriggerAnswer(option);
+            triggerOptionsEl.appendChild(btn);
+        });
+    } else {
+        triggerHeadlineEl.textContent = "🏆 Excelente! Você aprendeu a identificar os gatilhos das Fake News!";
+        triggerOptionsEl.innerHTML = '';
+        triggerFeedbackEl.className = "feedback correct";
+        triggerFeedbackEl.textContent = `Pontuação final: ${triggerScore}/${triggerQuestions.length}`;
+        triggerFeedbackEl.classList.remove('hidden');
+    }
+}
+
+function checkTriggerAnswer(selectedOption) {
+    const q = triggerQuestions[triggerIndex];
+    const isCorrect = selectedOption === q.correct;
+
+    // Desabilita todos os botões de opção após o clique
+    const buttons = triggerOptionsEl.querySelectorAll('button');
+    buttons.forEach(btn => btn.disabled = true);
+
+    if (isCorrect) {
+        triggerScore++;
+        triggerScoreEl.textContent = triggerScore;
+        triggerFeedbackEl.className = "feedback correct";
+        triggerFeedbackEl.textContent = `🎯 Exato! ${q.explanation}`;
+    } else {
+        triggerFeedbackEl.className = "feedback wrong";
+        triggerFeedbackEl.textContent = `❌ Não exatamente. O gatilho principal é "${q.correct}". ${q.explanation}`;
+    }
+
+    triggerFeedbackEl.classList.remove('hidden');
+
+    setTimeout(() => {
+        triggerIndex++;
+        loadTriggerQuestion();
+    }, 3500);
+}
+
+loadTriggerQuestion();
