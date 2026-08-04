@@ -83,9 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Fecha o modal no botão "X"
-    modalCloseBtn.addEventListener('click', () => {
-        modal.classList.add('hidden');
-    });
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    }
 
     // Fecha o modal clicando fora da caixa
     modal.addEventListener('click', (e) => {
