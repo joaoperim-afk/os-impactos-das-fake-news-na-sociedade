@@ -7,20 +7,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
 
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = htmlTag.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-    });
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlTag.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        });
+    }
 
     function setTheme(theme) {
         htmlTag.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        themeToggleBtn.innerHTML = theme === 'dark' ? '☀️ Modo Claro' : '🌙 Modo Escuro';
+        if (themeToggleBtn) {
+            themeToggleBtn.innerHTML = theme === 'dark' ? '☀️ Modo Claro' : '🌙 Modo Escuro';
+        }
     }
 
 
-    // --- CONTEÚDO DAS JANELAS FLUTUANTES (MODAL) ---
+    // --- CONTEÚDO DOS MODAIS (ARTIGOS) ---
     const modalData = {
         saude: {
             title: "🩺 O Impacto na Saúde Pública e Infodemia",
@@ -64,13 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalBody = document.getElementById('modal-body');
     const modalCloseBtn = document.getElementById('modal-close-btn');
 
-    // Abre o modal ao clicar nos cards
     document.querySelectorAll('[data-modal]').forEach(card => {
         card.addEventListener('click', () => {
             const topic = card.getAttribute('data-modal');
             const data = modalData[topic];
 
-            if (data) {
+            if (data && modalBody && modal) {
                 modalBody.innerHTML = `
                     <div class="modal-body-content">
                         <h3>${data.title}</h3>
@@ -82,19 +85,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Fecha o modal no botão "X"
-    if (modalCloseBtn) {
+    if (modalCloseBtn && modal) {
         modalCloseBtn.addEventListener('click', () => {
             modal.classList.add('hidden');
         });
     }
 
-    // Fecha o modal clicando fora da caixa
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
-        }
-    });
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    }
 
 
     // --- JOGO 1: DETETIVE DA VERDADE ---
@@ -126,6 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnReal = document.getElementById('btn-real');
 
     function loadNews() {
+        if (!headlineEl || !btnFake || !btnReal || !feedbackEl) return;
+
         feedbackEl.classList.add('hidden');
         btnFake.disabled = false;
         btnReal.disabled = false;
@@ -143,6 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkAnswer(userSaidFake) {
+        if (!btnFake || !btnReal || !feedbackEl || !scoreEl) return;
+
         const currentNews = newsList[currentIndex];
         const isCorrect = userSaidFake === currentNews.isFake;
 
@@ -167,9 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
-    btnFake.addEventListener('click', () => checkAnswer(true));
-    btnReal.addEventListener('click', () => checkAnswer(false));
+    if (btnFake && btnReal) {
+        btnFake.addEventListener('click', () => checkAnswer(true));
+        btnReal.addEventListener('click', () => checkAnswer(false));
+    }
 
+    // Inicia o Jogo 1
     loadNews();
 
 
@@ -204,6 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const triggerScoreEl = document.getElementById('trigger-score');
 
     function loadTriggerQuestion() {
+        if (!triggerHeadlineEl || !triggerOptionsEl || !triggerFeedbackEl) return;
+
         triggerFeedbackEl.classList.add('hidden');
         triggerOptionsEl.innerHTML = '';
 
@@ -215,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const btn = document.createElement('button');
                 btn.className = 'btn btn-option';
                 btn.textContent = option;
-                btn.onclick = () => checkTriggerAnswer(option);
+                btn.addEventListener('click', () => checkTriggerAnswer(option));
                 triggerOptionsEl.appendChild(btn);
             });
         } else {
@@ -228,6 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkTriggerAnswer(selectedOption) {
+        if (!triggerOptionsEl || !triggerFeedbackEl || !triggerScoreEl) return;
+
         const q = triggerQuestions[triggerIndex];
         const isCorrect = selectedOption === q.correct;
 
@@ -252,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3500);
     }
 
+    // Inicia o Jogo 2
     loadTriggerQuestion();
 
 });
