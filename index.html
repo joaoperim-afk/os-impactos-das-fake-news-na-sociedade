@@ -25,17 +25,17 @@
         <p class="subtitle">Clique em qualquer card para abrir o artigo explicativo com visões de pesquisadores.</p>
         
         <div class="cards-grid">
-            <div class="card card-link" onclick="abrirJanela('saude')">
+            <div class="card card-link" data-modal="saude">
                 <h3>🩺 Saúde Pública ↗</h3>
                 <p>Boatos sobre vacinas e tratamentos milagrosos colocam vidas em risco e ressuscitam doenças erradicadas.</p>
             </div>
 
-            <div class="card card-link" onclick="abrirJanela('democracia')">
+            <div class="card card-link" data-modal="democracia">
                 <h3>🏛️ Democracia ↗</h3>
                 <p>Manipulação de debates eleitorais e polarização extrema enfraquecem a confiança nas instituições.</p>
             </div>
 
-            <div class="card card-link" onclick="abrirJanela('economia')">
+            <div class="card card-link" data-modal="economia">
                 <h3>💸 Economia & Golpes ↗</h3>
                 <p>Fraudes financeiras, falsas promoções e pânico no mercado geram prejuízos bilionários.</p>
             </div>
@@ -95,9 +95,9 @@
         </div>
     </section>
 
-    <div id="info-modal" class="modal-overlay hidden" onclick="fecharAoClicarFora(event)">
+    <div id="info-modal" class="modal-overlay hidden">
         <div class="modal-content">
-            <button class="modal-close" onclick="fecharJanela()">&times;</button>
+            <button id="modal-close-btn" class="modal-close" aria-label="Fechar janela">&times;</button>
             <div id="modal-body"></div>
         </div>
     </div>
